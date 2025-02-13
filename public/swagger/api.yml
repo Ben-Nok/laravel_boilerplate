@@ -1,0 +1,11 @@
+openapi: 3.0.0
+info:
+  title: Meine API
+  version: 1.0.0
+paths:
+  /example:
+    get:
+      summary: "Beispiel-Endpunkt"
+      responses:
+        '200':
+          description: "Erfolgreiche Antwort"
