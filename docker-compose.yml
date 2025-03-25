@@ -20,7 +20,7 @@ services:
         volumes:
             - '.:/var/www/html'
         networks:
-            - emscc
+            - laravel_boilerplate
         depends_on:
             - pgsql
             - redis
@@ -34,10 +34,10 @@ services:
             POSTGRES_USER: '${DB_USERNAME}'
             POSTGRES_PASSWORD: '${DB_PASSWORD:-secret}'
         volumes:
-            - 'emscc-pgsql:/var/lib/postgresql/data'
+            - 'laravel_boilerplate-pgsql:/var/lib/postgresql/data'
             - './vendor/laravel/sail/database/pgsql/create-testing-database.sql:/docker-entrypoint-initdb.d/10-create-testing-database.sql'
         networks:
-            - emscc
+            - laravel_boilerplate
         healthcheck:
             test: ["CMD", "pg_isready", '-q', '-d', '${DB_DATABASE}', '-U', '${DB_USERNAME}']
             retries: 3
@@ -47,18 +47,18 @@ services:
         ports:
             - '${FORWARD_REDIS_PORT:-6379}:6379'
         volumes:
-            - 'emscc-redis:/data'
+            - 'laravel_boilerplate-redis:/data'
         networks:
-            - emscc
+            - laravel_boilerplate
         healthcheck:
             test: ["CMD", "redis-cli", "ping"]
             retries: 3
             timeout: 5s
 networks:
-    emscc:
+    laravel_boilerplate:
         driver: bridge
 volumes:
-    emscc-pgsql:
+    laravel_boilerplate-pgsql:
         driver: local
-    emscc-redis:
+    laravel_boilerplate-redis:
         driver: local
