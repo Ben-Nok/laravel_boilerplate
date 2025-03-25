@@ -7,5 +7,9 @@ Route::get('/', function () {
 });
 
 Route::get('/api/docs', function () {
-    return response()->file(public_path('swagger/index.html'));
+    return view('swagger');
+});
+
+Route::get('/api/docs/api.yml', function () {
+    return response()->file(resource_path('swagger/api.yml'));
 });
